@@ -9,7 +9,29 @@ import pool from "../utils/database.js";
 export async function getArticles() {
     // TODO
     try {
-        const [rows] = await pool.query("SELECT * FROM articles");
+        const [rows] = await pool.query(
+            `SELECT a.*, j.name AS journalist_name
+             FROM articles a
+             INNER JOIN journalists j ON a.journalist_id = j.id
+            `
+        );
+        return rows;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Get articles with joined journalist name 
+export async function getArticlesWithJournalist(id) {
+    try {
+        const [rows] = await pool.query(
+            `SELECT a.*, j.name AS journalist_name
+             FROM articles a 
+             LEFT JOIN journalists j ON a.journalist_id = j.id 
+             WHERE j.id = ?
+            `
+            , [id]
+        );
         return rows;
     } catch (error) {
         console.error(error);
@@ -20,7 +42,13 @@ export async function getArticles() {
 export async function getArticleById(id) {
     // TODO
     try {
-        const [rows] = await pool.query("SELECT * FROM articles WHERE id = ?", [id]);
+        const [rows] = await pool.query(
+            `SELECT a.*, j.name AS journalist_name
+             FROM articles a
+             INNER JOIN journalists j ON a.journalist_id = j.id
+             WHERE a.id = ?
+            `, [id]
+        );
         return rows[0];
     } catch (error) {
         console.error(error);
