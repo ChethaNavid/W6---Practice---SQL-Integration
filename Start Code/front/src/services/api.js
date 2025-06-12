@@ -13,6 +13,11 @@ export const getArticleById = async (id) => {
   return response.data;
 };
 
+export const getArticleByJournalist = async (journalistId) => {
+  const response = await axios.get(`${API_BASE_URL}/journalists/${journalistId}/articles`);
+  return response.data;
+}
+
 export const createArticle = async (article) => {
   const response = await axios.post(`${API_BASE_URL}/articles`, article);
   return response.data;

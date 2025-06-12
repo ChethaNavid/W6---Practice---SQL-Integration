@@ -11,14 +11,14 @@ export default function ArticlePage() {
 
   useEffect(() => {
     fetchArticle();
-  }, []);
+  }, [id]);
 
 
   const fetchArticle = async () => {
     try {
       setLoading(true);
 
-      const found = getArticleById(id);
+      const found = await getArticleById(id);
       if (found) {
         setArticle(found);
         setError("");
@@ -38,11 +38,11 @@ export default function ArticlePage() {
   if (!article) return <div>No article found.</div>;
 
   return (
-    <div>
+    <div className="article-card">
       <h2>{article.title}</h2>
       <p>{article.content}</p>
       <div>
-        <strong>Journalist:</strong> {article.journalist}
+        <strong>Journalist:</strong> {article.journalist_name}
       </div>
       <div>
         <strong>Category:</strong> {article.category}
