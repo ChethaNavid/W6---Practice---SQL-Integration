@@ -28,6 +28,21 @@ export async function getArticleById(req, res) {
   }
 }
 
+// GET /api/journalists/:id/articles
+export async function getAllArticleByJournalistID(req, res) {
+  try {
+    const article = await articleRepository.getArticlesWithJournalist(req.params.id);
+
+    if(!article) {
+      return res.status(404).json({ message: "Article Not Found" });
+    }
+    return res.json(article);
+  } catch (error) {
+    console.error("Error fetching article:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
 // POST /api/articles
 export async function createArticle(req, res) {
   try {
