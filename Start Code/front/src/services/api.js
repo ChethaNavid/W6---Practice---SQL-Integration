@@ -18,6 +18,16 @@ export const getArticleByJournalist = async (journalistId) => {
   return response.data;
 }
 
+export const getAllCategory = async () => {
+  const response = await axios.get(`${API_BASE_URL}/categories`);
+  return response.data;
+}
+
+export const getArticleByCategory = async (categoryId) => {
+  const response = await axios.get(`${API_BASE_URL}/categories/${categoryId}/articles`);
+  return response.data;
+}
+
 export const createArticle = async (article) => {
   const response = await axios.post(`${API_BASE_URL}/articles`, article);
   return response.data;

@@ -159,6 +159,11 @@ button:hover {
   margin-bottom: 10px;
 }
 
+.article-category {
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
 .article-snippet {
   flex-grow: 1;
   font-size: 0.95em;
