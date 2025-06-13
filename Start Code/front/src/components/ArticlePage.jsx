@@ -45,7 +45,7 @@ export default function ArticlePage() {
         <strong>Journalist:</strong> {article.journalist_name}
       </div>
       <div>
-        <strong>Category:</strong> {article.category}
+        <strong>Category:</strong> {article.category_name}
       </div>
     </div>
   );
