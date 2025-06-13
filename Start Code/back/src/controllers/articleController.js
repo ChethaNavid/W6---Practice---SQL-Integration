@@ -43,6 +43,32 @@ export async function getAllArticleByJournalistID(req, res) {
   }
 }
 
+// GET /api/categories
+export async function getAllCategories(req, res) {
+  try {
+    const categories = await articleRepository.getAllCategories();
+
+    if(!categories) return res.status(404).json({ message: "Category Not Found" });
+
+    return res.json(categories);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// GET /api/categories/:id/articles
+export async function getArticleByCategory(req, res) {
+  try {
+    const article = await articleRepository.getArticleFilteredByCategory(req.params.id);
+    
+    if(!article) return res.status(404).json({ message: "Article Not Found" });
+
+    return res.json(article);
+  } catch {
+    console.error(error);
+  }
+}
+
 // POST /api/articles
 export async function createArticle(req, res) {
   try {
